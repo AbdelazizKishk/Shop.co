@@ -5,7 +5,7 @@ import { logedGuard } from './core/guards/loged.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'register',
     pathMatch: 'full',
     title: 'Home',
   },
