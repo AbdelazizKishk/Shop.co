@@ -13,6 +13,12 @@ export const routes: Routes = [
     canActivate: [logedGuard],
     children: [
       {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+        title: 'Login',
+      },
+      {
         path: 'login',
         loadComponent: () =>
           import('./pages/login/login.component').then((m) => m.LoginComponent),
