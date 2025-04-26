@@ -1,0 +1,23 @@
+<div
+  class="max-w-xs mx-auto overflow-hidden rounded-xl shadow-md border border-gray-200 bg-white hover:shadow-lg transition"
+>
+  <img
+    [src]="allCategories().image"
+    alt="Women's Fashion"
+    class="h-48 w-full object-cover"
+  />
+
+  <div class="p-4 text-center">
+    <h2
+      class="text-lg font-semibold text-gray-800 hover:text-orange-600 transition"
+    >
+      {{ allCategories().name }}
+    </h2>
+    <a
+      href="/categories/women's-fashion"
+      class="mt-2 inline-block text-sm text-orange-600 hover:underline"
+    >
+      Explore Now →
+    </a>
+  </div>
+</div>

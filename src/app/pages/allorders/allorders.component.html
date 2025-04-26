@@ -1,0 +1,123 @@
+<div class="max-w-5xl mx-auto px-4 py-8 space-y-6">
+  <!-- Order Header -->
+  <div class="rounded-lg border border-gray-200 p-4 shadow-sm bg-white">
+    <div class="flex justify-between items-center">
+      <div>
+        <h2 class="text-lg font-semibold text-gray-800">
+          Order #{{ allOrders()[0].id }}
+        </h2>
+        <p class="text-sm text-gray-500">
+          Placed on : {{ allOrders()[0].createdAt | date : "short" }}
+        </p>
+      </div>
+      <div class="flex gap-2">
+        <span
+          class="text-sm px-3 py-1 rounded-full bg-green-100 text-green-700"
+        >
+          Paid
+        </span>
+        <span
+          class="text-sm px-3 py-1 rounded-full bg-yellow-100 text-yellow-700"
+        >
+          Not Delivered
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- User & Shipping Info -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="rounded-lg border border-gray-200 p-4 shadow-sm bg-white">
+      <h3 class="font-semibold text-gray-800 mb-2">Customer data :</h3>
+      <p class="text-sm text-gray-600">
+        Name : <strong>{{ allOrders()[0].user.name }}</strong>
+      </p>
+      <p class="text-sm text-gray-600">
+        Email : <strong>{{ allOrders()[0].user.email }}</strong>
+      </p>
+      <p class="text-sm text-gray-600">
+        Phone : <strong>{{ allOrders()[0].user.phone }}</strong>
+      </p>
+    </div>
+    <div class="rounded-lg border border-gray-200 p-4 shadow-sm bg-white">
+      <h3 class="font-semibold text-gray-800 mb-2">Address :</h3>
+      <p class="text-sm text-gray-600">
+        City : <strong>{{ allOrders()[0].shippingAddress.city }}</strong>
+      </p>
+      <p class="text-sm text-gray-600">
+        Details : <strong>{{ allOrders()[0].shippingAddress.details }}</strong>
+      </p>
+      <p class="text-sm text-gray-600">
+        Phone : <strong>{{ allOrders()[0].shippingAddress.phone }}</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- Cart Items -->
+  <div
+    class="rounded-lg border border-gray-200 p-4 shadow-sm bg-white space-y-4"
+  >
+    <h3 class="font-semibold text-gray-800 mb-4">Order Items</h3>
+
+    @for (order of allOrders()[0].cartItems; track order._id) {
+    <div class="flex items-center gap-4 border-b pb-4">
+      <img
+        [src]="order.product.imageCover"
+        [alt]="order.product.title"
+        class="h-16 w-16 rounded object-cover"
+      />
+      <div class="flex-1">
+        <h4 class="text-sm font-medium text-gray-900">
+          {{ order.product.title }}
+        </h4>
+        <p class="text-xs text-gray-500">
+          {{ order.product.brand.name }} •
+          {{ order.product.category.name }}
+        </p>
+      </div>
+      <div class="text-right text-sm">
+        <p class="text-gray-800">Quantity : {{ order.count }}</p>
+        <p class="text-gray-500">Price : {{ order.price | currency }}</p>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Payment Summary -->
+  <div class="rounded-lg border border-gray-200 p-4 shadow-sm bg-white">
+    <h3 class="font-semibold text-gray-800 mb-4">Payment Summary</h3>
+    <div class="text-sm space-y-2 text-gray-600">
+      <p>
+        Subtotal :
+        <span class="float-right">{{
+          allOrders()[0].totalOrderPrice | currency
+        }}</span>
+      </p>
+      <p>
+        Shipping :
+        <span class="float-right">{{
+          allOrders()[0].shippingPrice | currency
+        }}</span>
+      </p>
+      <p>
+        Tax :
+        <span class="float-right">{{
+          allOrders()[0].taxPrice | currency
+        }}</span>
+      </p>
+      <hr />
+      <p class="font-bold text-gray-800">
+        Total :
+        <span class="float-right">{{
+          allOrders()[0].totalOrderPrice | currency
+        }}</span>
+      </p>
+    </div>
+    <p class="text-sm text-gray-500 mt-2">
+      Payment Method : <strong>{{ allOrders()[0].paymentMethodType }}</strong>
+    </p>
+    <p class="text-sm text-gray-500">
+      Paid At : <strong>{{ allOrders()[0].paidAt | date : "short" }}</strong>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<section class="container h-screen mx-auto my-4 md:my-8">
+  <div
+    class="flex flex-col w-[90%] mx-auto md:flex-row items-center md:items-start bg-gray-100 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group"
+  >
+    <div class="relative w-full md:w-1/3">
+      <img
+        class="w-full h-64 md:h-80 object-contain transition-transform duration-300 group-hover:scale-105"
+        [src]="productInfo().imageCover"
+        [alt]="productInfo().title"
+      />
+      <div
+        class="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded"
+      >
+        {{ productInfo().category.name }}
+      </div>
+    </div>
+
+    <div
+      class="p-5 flex flex-col gap-4 justify-center md:justify-center md:w-2/3"
+    >
+      <div class="flex justify-between items-start">
+        <h2 class="text-xl font-semibold text-gray-800">
+          {{ productInfo().title.split(" ", 5).join(" ") }}
+        </h2>
+        <span
+          role="button"
+          (click)="addProductToWishlist(productInfo().id)"
+          class="text-3xl cursor-pointer text-black hover:text-red-500 transition-colors"
+        >
+          <i class="fa-solid fa-heart-circle-plus"></i>
+        </span>
+      </div>
+
+      <p class="text-gray-600 text-sm line-clamp-3">
+        {{ productInfo().description.split(" ", 20).join(" ") }}
+      </p>
+
+      <div class="flex items-center gap-2">
+        <span class="text-gray-500 text-sm">Rating:</span>
+        <span class="text-yellow-500 text-sm font-bold">
+          {{ productInfo().ratingsQuantity }}
+          <i class="fa-solid fa-star"></i>
+        </span>
+      </div>
+
+      <div class="flex justify-between items-center mt-4">
+        <span class="text-2xl font-bold text-black">
+          ${{ productInfo().price }}
+        </span>
+
+        <button
+          (click)="addProductToCart(productInfo().id)"
+          class="bg-black text-white px-6 py-2 rounded-xl hover:bg-gray-800 transition"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

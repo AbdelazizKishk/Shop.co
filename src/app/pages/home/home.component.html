@@ -1,0 +1,165 @@
+<section class="hero flex items-center justify-between px-8 min-h-screen">
+  <div class="w-full md:w-[40%] flex flex-col justify-center">
+    <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+      FIND CLOTHES<br />THAT MATCHES<br />YOUR STYLE
+    </h1>
+    <p class="text-lg font-light text-gray-500 my-6">
+      Browse through our diverse range of meticulously crafted garments,
+      designed to bring out your individuality and cater to your sense of style.
+    </p>
+    <button
+      routerLink="/products"
+      class="bg-black text-white px-8 py-3 rounded-full w-fit hover:bg-gray-800 transition"
+    >
+      Shop Now
+    </button>
+    <div class="flex flex-col md:flex-row gap-8 mt-10">
+      <div>
+        <p class="text-3xl font-bold">200+</p>
+        <p class="text-gray-500 text-sm mt-2">International Brands</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold">2,000+</p>
+        <p class="text-gray-500 text-sm mt-2">High-Quality Products</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold">30,000+</p>
+        <p class="text-gray-500 text-sm mt-2">Happy Customers</p>
+      </div>
+    </div>
+  </div>
+</section>
+@if (showScrollTopBtn) {
+<button
+  (click)="scrollToTop()"
+  class="fixed cursor-pointer bottom-6 right-6 bg-black text-white px-4 py-2 rounded-full z-50"
+>
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+}
+<section class="bg-black">
+  <owl-carousel-o [options]="customOptions">
+    @for (category of allCategories(); track category._id) {
+    <ng-template carouselSlide>
+      <div class="p-4 flex flex-col items-center text-center">
+        <h2 class="text-xl font-bold text-white mb-2">
+          {{ category.name }}
+        </h2>
+        <a
+          [routerLink]="['/detailsCatg', category._id]"
+          class="inline-block bg-white text-black px-4 py-2 rounded-full"
+        >
+          Explore
+        </a>
+      </div>
+    </ng-template>
+    }
+  </owl-carousel-o>
+</section>
+<section class="container mx-auto my-4 md:my-8">
+  <h2 class="text-2xl md:text-5xl font-bold text-center mb-4 md:mb-8">
+    NEW ARRIVALS
+  </h2>
+  <div class="flex flex-wrap justify-center md:grid md:grid-cols-4 gap-6">
+    @for (product of allProducts().slice(0,8); track product.id) {
+    <div
+      class="w-[90%] md:w-auto bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+    >
+      <div
+        [routerLink]="['/detailsprod', product.id]"
+        class="relative cursor-pointer"
+      >
+        <img
+          class="w-full h-60 object-cover"
+          [src]="product.imageCover"
+          [alt]="product.title"
+        />
+        <div
+          class="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded"
+        >
+          {{ product.category.name }}
+        </div>
+      </div>
+      <div class="p-5 flex flex-col gap-3">
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-semibold text-gray-800 truncate">
+            {{ product.title.split(" ", 3).join(" ") }}
+          </h2>
+          <span
+            (click)="addProductToWishlist(product.id)"
+            class="text-xl cursor-pointer"
+            ><i class="fa-solid fa-heart-circle-plus"></i
+          ></span>
+        </div>
+
+        <p class="text-gray-600 text-sm line-clamp-3">
+          {{ product.description }}
+        </p>
+        <div class="flex justify-between items-center mt-2">
+          <span class="text-lg font-bold text-black">${{ product.price }}</span>
+
+          <button
+            (click)="addProductToCart(product.id)"
+            class="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+    } @defer (on interaction) { @for (product of allProducts().slice(9); track
+    product.id) {
+    <div
+      class="w-[90%] md:w-auto bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+    >
+      <div
+        [routerLink]="['/detailsprod', product.id]"
+        class="relative cursor-pointer"
+      >
+        <img
+          class="w-full h-60 object-cover"
+          [src]="product.imageCover"
+          [alt]="product.title"
+        />
+        <div
+          class="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded"
+        >
+          {{ product.category.name }}
+        </div>
+      </div>
+      <div class="p-5 flex flex-col gap-3">
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-semibold text-gray-800 truncate">
+            {{ product.title.split(" ", 3).join(" ") }}
+          </h2>
+          <span
+            (click)="addProductToWishlist(product.id)"
+            class="text-xl cursor-pointer"
+            ><i class="fa-solid fa-heart-circle-plus"></i
+          ></span>
+        </div>
+
+        <p class="text-gray-600 text-sm line-clamp-3">
+          {{ product.description }}
+        </p>
+        <div class="flex justify-between items-center mt-2">
+          <span class="text-lg font-bold text-black">${{ product.price }}</span>
+
+          <button
+            (click)="addProductToCart(product.id)"
+            class="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+    } } @placeholder {
+    <button
+      class="bg-black rounded-md px-6 py-2 text-white hover:bg-white hover:text-black hover:border border-black border-2 transition duration-300 ease-in-out"
+    >
+      View All
+    </button>
+    }
+  </div>
+</section>
