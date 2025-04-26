@@ -5,12 +5,6 @@ import { logedGuard } from './core/guards/loged.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'register',
-    pathMatch: 'full',
-    title: 'Home',
-  },
-  {
-    path: '',
     loadComponent: () =>
       import('./layouts/auth-layout/auth-layout.component').then(
         (m) => m.AuthLayoutComponent
@@ -51,6 +45,12 @@ export const routes: Routes = [
     title: 'blank',
     canActivate: [authGuard],
     children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+        title: 'Home',
+      },
       {
         path: 'home',
         loadComponent: () =>
