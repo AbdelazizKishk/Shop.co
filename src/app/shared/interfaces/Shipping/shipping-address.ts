@@ -13,6 +13,7 @@ export interface ShippingAddress {
   createdAt: string;
   updatedAt: string;
   id: number;
+  __v: number;
 }
 
 export interface ShippingAddress {

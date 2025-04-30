@@ -8,7 +8,6 @@ export const logedGuard: CanActivateFn = (route, state) => {
 
   if (isPlatformBrowser(id)) {
     if (localStorage.getItem('usertoken') !== null) {
-      alert('You are already logged in!');
       router.navigate(['/home']);
       return false;
     } else {

@@ -68,6 +68,7 @@ export class ProductsComponent implements OnInit {
             progressBar: true,
             progressAnimation: 'increasing',
           });
+          this.cartService.cartNumber.set(res.numOfCartItems);
         }
       },
       error: (error) => {

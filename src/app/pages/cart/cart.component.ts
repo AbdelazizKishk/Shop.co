@@ -50,7 +50,6 @@ export class CartComponent implements OnInit {
   removeProductFromCart(id: string): void {
     this.cartService.removeSpecificCartItem(id).subscribe({
       next: (res) => {
-        console.log(res);
         if (res.status === 'success') {
           this.toastrService.success(
             'Product removed from cart successfully',
@@ -61,6 +60,7 @@ export class CartComponent implements OnInit {
               progressAnimation: 'increasing',
             }
           );
+          this.cartService.cartNumber.set(res.numOfCartItems);
         }
         this.allProductscart.set(res.data);
       },
@@ -94,6 +94,7 @@ export class CartComponent implements OnInit {
               Swal.fire('Cancelled', 'Your cart is safe 😊', 'info');
             }
           });
+          this.cartService.cartNumber.set(0);
         }
       },
       error: (error) => {

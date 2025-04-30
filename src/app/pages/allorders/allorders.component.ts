@@ -6,8 +6,8 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { AllorderService } from '../../core/services/allorder/allorder.service';
-import { ShippingAddress } from '../../shared/interfaces/Shipping/shipping-address';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { ShippingAddress } from '../../shared/interfaces/Shipping/shipping-address';
 
 @Component({
   selector: 'app-allorders',
@@ -23,10 +23,9 @@ export class AllordersComponent implements OnInit {
   }
 
   getAllOrders(): void {
-    this.allorderService.getAllOrders().subscribe({
+    this.allorderService.getUserOrders().subscribe({
       next: (res) => {
-        console.log(res.data);
-        this.allOrders.set(res.data);
+        this.allOrders.set(res);
       },
       error: (err) => {
         console.error(err);

@@ -18,7 +18,9 @@ export class AllorderService {
       }
     );
   }
-  getAllOrders(): Observable<any> {
-    return this.http.get(`${environment.baseUrlPro}/api/v1/orders/`);
+  getUserOrders(): Observable<any> {
+    return this.http.get(
+      `${environment.baseUrlPro}/api/v1/orders/user/68050b147b829a00762b9647`
+    );
   }
 }
