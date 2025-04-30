@@ -56,9 +56,7 @@ export class CheckoutComponent implements OnInit {
             console.log(res);
             if ((res.status = 'success')) {
               this.scucessMsg = true;
-              setTimeout(() => {
-                open(res.session.url, '_self');
-              }, 2000);
+              open(res.session.url, '_self');
             }
             this.isLoading = false;
           },
