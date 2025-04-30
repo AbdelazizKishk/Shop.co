@@ -17,6 +17,7 @@ import { CartService } from '../../core/services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { WishlistService } from '../../core/services/wishlist/wishlist.service';
 import Swal from 'sweetalert2';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-products',
@@ -36,6 +37,10 @@ export class ProductsComponent implements OnInit {
   allProducts: WritableSignal<Iproduct[]> = signal([]);
 
   ngOnInit(): void {
+    AOS.init({
+      duration: 1000, // animation duration
+      once: false, // whether animation should happen only once
+    });
     this.renderer2.listen('window', 'scroll', () => {
       const hero = this.el.nativeElement.querySelector('hero');
       const heroHeight = hero?.offsetHeight || 300;

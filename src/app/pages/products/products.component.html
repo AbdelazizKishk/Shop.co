@@ -46,6 +46,7 @@
   <div class="flex flex-wrap justify-center md:grid md:grid-cols-4 gap-6">
     @for (product of allProducts() | search:searchQuery ; track product.id) {
     <div
+      data-aos="fade-up"
       class="w-[90%] md:w-auto bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
     >
       <div

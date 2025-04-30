@@ -18,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 import { WishlistService } from '../../core/services/wishlist/wishlist.service';
 import Swal from 'sweetalert2';
 import { Icategories } from '../../shared/interfaces/icategories';
-
+import * as AOS from 'aos';
 @Component({
   selector: 'app-home',
   imports: [CarouselModule, RouterLink],
@@ -64,6 +64,10 @@ export class HomeComponent implements OnInit {
     nav: false,
   };
   ngOnInit(): void {
+    AOS.init({
+      duration: 1000, // animation duration
+      once: false, // whether animation should happen only once
+    });
     this.renderer2.listen('window', 'scroll', () => {
       const hero = this.el.nativeElement.querySelector('hero');
       const heroHeight = hero?.offsetHeight || 300;
